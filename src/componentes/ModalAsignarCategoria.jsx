@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { obtenerCategorias } from "../servicios/api"
+import { alertaCheck, alertaError, alertaInfo } from '../servicios/Alertas';
 
 function ModalAsignarCategoria(props) {
   const [show, setShow] = useState(false);
@@ -13,15 +14,17 @@ function ModalAsignarCategoria(props) {
   const productos = props.listaProductos;
   const categorias = props.listaCategorias;
   const [productoAsignar, setProductoAsignar] = useState('');
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState({id: '', nombre: ''});
   const [categoriaNueva, setCategoriaNueva] = useState('');
 
 
 
     const editarCategoria = async (e) => {
         e.preventDefault();
-        if (categoriaSeleccionada !== categoriaNueva) { 
-            if (categoriaSeleccionada && categoriaNueva) {
+        if (categoriaSeleccionada && categoriaNueva) { 
+            console.log("Categoria seleccionada:", categoriaSeleccionada.id);
+            console.log("Categoria nueva:", categoriaNueva);
+            if ((categoriaSeleccionada.id != categoriaNueva)) {
                 try {
                     const res = await fetch("http://localhost:8000/asignar_categoria", {
                     method: "POST",
@@ -30,17 +33,16 @@ function ModalAsignarCategoria(props) {
                 });
                 const data = await res.json();
                 console.log("Categoría Asignada:", data);
-                handleClose();
-                alert("Categoría asignada exitosamente");
-                window.location.reload();
+                alertaCheck("Categoría asignada", "La categoría se ha asignado correctamente", true);
                 } catch (err) {
-                console.error("Error:", err);
+                    console.error("Error:", err);
+                    alertaError("Error al asignar categoría", "No se pudo asignar la categoría.");
                 }
             } else {
-                alert("Por favor seleccione ambas categorías");
+                alertaInfo("Por favor seleccione una categoria diferente");
             }
         } else {
-            alert("Por favor seleccione una categoría diferente");
+            alertaInfo("Por favor seleccione ambas categorías");
         }
     }; 
 
@@ -51,7 +53,7 @@ function ModalAsignarCategoria(props) {
         const producto = productos.find(c => c.id == cat);
         //sabiendo la id de la categoria del producto buscamos en la lista para obtener el nombre
         const categoriaEncontrada = categorias.find(c => c.id == producto.categoria_id);
-        setCategoriaSeleccionada(categoriaEncontrada ? categoriaEncontrada.nombre : '');
+        setCategoriaSeleccionada(categoriaEncontrada ? categoriaEncontrada : '');
     }
 
   return (
@@ -89,7 +91,7 @@ function ModalAsignarCategoria(props) {
                     type="text"
                     id="nombreCategoriaActual"
                     className="form-control"
-                    value={categoriaSeleccionada}
+                    value={categoriaSeleccionada.nombre}
                     disabled
                     />
                 </div>

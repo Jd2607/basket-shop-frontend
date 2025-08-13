@@ -1,6 +1,7 @@
 import { useState } from "react";
 import '../estilos/Navbar.css';
 import { useNavigate } from "react-router-dom";
+import { alertaDespedida } from "../servicios/Alertas";
 
 function Navbar(props) {
 
@@ -8,12 +9,13 @@ function Navbar(props) {
     const navigate = useNavigate();
 
     const cerrarSesion = () => {
-        alert("Sesión cerrada correctamente");
-        // 1. Eliminar token
-        localStorage.removeItem("token");
-
-        // 2. Redirigir al login
-        window.location.href = "/login"; 
+        alertaDespedida();
+        setTimeout(() => {
+            // 1. Eliminar token
+            localStorage.removeItem("token");
+            // 2. Redirigir al login
+            window.location.href = "/login";
+        }, 2000);
     };
 
     return (

@@ -1,21 +1,10 @@
 import baloncesto from "../assets/baloncesto.png"
 import "../estilos/CartaProducto.css"
-import Swal from 'sweetalert2';
+import { alertaCheck } from '../servicios/Alertas.js'; 
 
 function CartaProducto(props){
 
-    //sweetAlert alerta de exito
-    const mostrarExito = () => {
-        Swal.fire({
-        title: 'Producto añadido!',
-        text: 'El producto fue añadido al carrito correctamente',
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-        });
-    };
-
     props.prod.cantidad = 1;
-    console.log(props.prod);
 
     function añadirAlCarrito() {
         console.log("Producto añadido al carrito");
@@ -42,7 +31,8 @@ function CartaProducto(props){
             //y sobreescribimos el carrito
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
-        mostrarExito();
+
+        alertaCheck("Producto añadido", "El producto se ha añadido correctamente al carrito");
     }
 
     return (

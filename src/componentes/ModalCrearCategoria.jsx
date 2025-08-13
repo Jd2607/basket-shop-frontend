@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { alertaCheck, alertaError } from '../servicios/Alertas';
 
 function ModalCrearCategoria() {
   const [show, setShow] = useState(false);
@@ -20,12 +21,10 @@ function ModalCrearCategoria() {
         body: JSON.stringify({ nombre })
       });
       const data = await res.json();
-      console.log("Categoría creada:", data);
-      handleClose();
-      alert("Categoría creada exitosamente");
-      window.location.reload();
+      alertaCheck("Categoría creada", "La categoría se ha creado correctamente", true);
     } catch (err) {
       console.error("Error:", err);
+      alertaError("Error al crear categoría", "No se pudo crear la categoría.");
     }
   };
 

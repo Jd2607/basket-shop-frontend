@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { obtenerCategorias } from "../servicios/api"
+import { alertaCheck, alertaError, alertaInfo } from '../servicios/Alertas';
+
 
 function ModalEditarCategoria(props) {
   const [show, setShow] = useState(false);
@@ -27,14 +29,13 @@ function ModalEditarCategoria(props) {
       });
       const data = await res.json();
       console.log("Categoría editada:", data);
-      handleClose();
-      alert("Categoría editada exitosamente");
-      window.location.reload();
+      alertaCheck("Categoría editada", "La categoría se ha editado correctamente", true);
     } catch (err) {
       console.error("Error:", err);
+      alertaError("Error al editar categoría", "No se pudo editar la categoría.");
     }
   } else {
-    alert("Por favor seleccione una categoría");
+    alertaInfo("Por favor seleccione una categoría");
   }
 };
 

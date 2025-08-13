@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../estilos/Login.css';
 import { useState } from 'react'
+import { alertaBienvenida } from "../servicios/Alertas";
 
 function Login() {
 
@@ -17,8 +18,10 @@ function Login() {
         if (!response.ok) throw new Error("Credenciales incorrectas");
         const data = await response.json();
         localStorage.setItem("token", data.access_token);
-        alert("Inicio de sesión exitoso");
-        window.location.href = "/catalogo"; // Redirigir al catálogo después de iniciar sesión
+        alertaBienvenida();
+        setTimeout(() => {
+            window.location.href = "/catalogo";
+        }, 2000);
     }
 
     return (

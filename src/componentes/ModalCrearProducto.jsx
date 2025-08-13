@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { alertaCheck, alertaError, alertaInfo } from '../servicios/Alertas';
 
 function ModalCrearProducto(props) {
   const [show, setShow] = useState(false);
@@ -53,14 +54,13 @@ function ModalCrearProducto(props) {
         });
         const data = await res.json();
         console.log("Producto creado:", data);
-        handleClose();
-        alert("Producto creado exitosamente");
-        window.location.reload();
+        alertaCheck("Producto creado", "El producto se ha creado correctamente", true);
       } catch (err) {
         console.error("Error:", err);
+        alertaError("Error al crear producto", "No se pudo crear el producto.");
       }
     } else {
-      alert("Por favor complete todos los campos");
+      alertaInfo("Por favor complete todos los campos");
     }
   };
 

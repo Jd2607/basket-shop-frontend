@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ModalConfirmacion from './ModalConfirmacion';
+import { alertaCheck, alertaError } from '../servicios/Alertas';
 
 function ModalEliminarCategoria(props) {
   const [show, setShow] = useState(false);
@@ -25,11 +26,10 @@ function ModalEliminarCategoria(props) {
       });
       const data = await res.json();
       console.log("Categoría eliminada:", data);
-      handleClose();
-      alert("Categoría eliminada exitosamente");
-      window.location.reload();
+      alertaCheck("Categoría eliminada", "La categoría se ha eliminado correctamente", true);
     } catch (err) {
       console.error("Error:", err);
+      alertaError("Error al eliminar categoría", "No se pudo eliminar la categoría.");
     }
   };
 
