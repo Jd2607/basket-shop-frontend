@@ -17,6 +17,7 @@ Este es un proyecto de comercio virtual desarrollado con React, Vite y Bootstrap
 - Gestion de categorias (crear categoria, editar categoria, eliminar categoria)
 - Gestion de inventarios (crear producto, asignar/cambiar categoria de un producto)
 - Carrito de compras
+- Ver compra (proximamente)
 
 ## 👤 Credenciales de prueba
 
