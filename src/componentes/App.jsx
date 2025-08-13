@@ -8,10 +8,14 @@ import "../estilos/App.css";
 import RutaProtegida from "../servicios/proteccionRutas";
 
 function App() {
+
+  const existeToken = localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       {/* Definición de rutas */}
       <Routes>
+        <Route path="/" element={existeToken ? <Catalogo /> : <Login />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/catalogo" element={<RutaProtegida> <Catalogo /> </RutaProtegida>} />
         <Route path="/categorias" element={<RutaProtegida> <Categorias /> </RutaProtegida>} />

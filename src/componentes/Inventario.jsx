@@ -5,6 +5,7 @@ import ModalCrearProducto from "./ModalCrearProducto";
 import { useEffect, useState } from "react";
 import { obtenerProductos, obtenerCategorias } from "../servicios/api";
 import ModalAsignarCategoria from "./ModalAsignarCategoria";
+import ModalEliminarProducto from "./ModalEliminarProducto";
 
 function Inventario(){
 
@@ -55,6 +56,7 @@ function Inventario(){
                         <div className="row">
                             <ModalCrearProducto listaCategorias={categorias} />
                             <ModalAsignarCategoria listaProductos={productoSimplificados()} listaCategorias={categorias} />
+                            <ModalEliminarProducto listaProductos={productoSimplificados()} />
                         </div>
                     </div>
                 </div>

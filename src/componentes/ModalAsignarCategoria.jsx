@@ -59,7 +59,7 @@ function ModalAsignarCategoria(props) {
   return (
     <>
       <Button variant="secondary mb-3 btnOpcionesInventario" onClick={handleShow}>
-        EDITAR
+        ASIGNAR CATEGORÍA
       </Button>
 
       <Modal show={show} onHide={handleClose}>

@@ -67,7 +67,7 @@ function ModalCrearProducto(props) {
 
   return (
     <>
-      <Button variant="primary mb-5 btnOpcionesInventario" onClick={handleShow}>
+      <Button variant="primary mb-4 btnOpcionesInventario" onClick={handleShow}>
         CREAR PRODUCTO
       </Button>
 
