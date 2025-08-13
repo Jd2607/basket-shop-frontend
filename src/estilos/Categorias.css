@@ -1,0 +1,9 @@
+
+.btnCategoria{
+    background-color: lightblue;
+    width: 100%;
+}
+
+.btnCategoria:hover{
+    background-color: red;
+}

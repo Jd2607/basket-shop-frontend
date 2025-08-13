@@ -1,0 +1,8 @@
+#opciones-inventario{
+    max-height: 100vh;
+}
+
+.btnOpcionesInventario{
+    height: 10vh;
+    font-size: 1.2rem;
+}

@@ -1,0 +1,15 @@
+#navegacion{
+    background-color: lightblue;
+}
+
+#btnCerrarSesion{
+    width: 15%;
+    background-color: red !important;
+    border-radius: 15px !important;
+}
+
+#btnCarrito{
+    width: 5%;
+    background-color: green !important;
+    border-radius: 15px !important;
+}

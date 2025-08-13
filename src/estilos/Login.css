@@ -1,0 +1,18 @@
+#contenedor-principal {
+  max-width: 400px !important; /* Fuerza el tamaño */
+  width: 100%;
+  background-color: white;
+}
+
+.enunciado{
+    background-color: lightblue;
+}
+
+#contenedor-principal {
+  width: 60%;       /* 60% del ancho de la pantalla */
+  margin: auto;
+}
+
+#btnIniciar{
+  background-color: lightblue !important;
+}

@@ -1,0 +1,25 @@
+.btnComprar{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0 0 15px 15px !important;
+    background-color: lightblue;
+}
+
+#contenedor-carta{
+    border-radius: 15px;
+}
+
+#carta-producto{
+    margin: auto;
+
+}
+
+.card-text{
+    font-size: 0.8rem;
+}
+
+.card {
+  height: 100% !important;
+}
+
