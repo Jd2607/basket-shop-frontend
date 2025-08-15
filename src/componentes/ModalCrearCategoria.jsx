@@ -15,7 +15,7 @@ function ModalCrearCategoria() {
   const crearCategoria = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8000/crear_categoria", {
+      const res = await fetch("http://localhost:8000/categorias/crear_categoria", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre })

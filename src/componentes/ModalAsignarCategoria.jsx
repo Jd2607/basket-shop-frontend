@@ -26,7 +26,7 @@ function ModalAsignarCategoria(props) {
             console.log("Categoria nueva:", categoriaNueva);
             if ((categoriaSeleccionada.id != categoriaNueva)) {
                 try {
-                    const res = await fetch("http://localhost:8000/asignar_categoria", {
+                    const res = await fetch("http://localhost:8000/productos/asignar_categoria", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ producto_id: productoAsignar, categoria_id: categoriaNueva })

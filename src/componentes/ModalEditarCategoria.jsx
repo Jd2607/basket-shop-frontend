@@ -22,7 +22,7 @@ function ModalEditarCategoria(props) {
     e.preventDefault();
     if (categoria !== "") {
       try {
-        const res = await fetch("http://localhost:8000/editar_categoria", {
+        const res = await fetch("http://localhost:8000/categorias/editar_categoria", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ categoria_id: categoria, nuevo_nombre: nombre })

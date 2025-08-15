@@ -19,7 +19,7 @@ function ModalEliminarProducto(props) {
   const eliminarProducto = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:8000/eliminar_producto", {
+      const res = await fetch("http://localhost:8000/productos/eliminar_producto", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: producto})

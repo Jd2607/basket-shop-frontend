@@ -47,7 +47,7 @@ function ModalCrearProducto(props) {
       };
 
       try {
-        const res = await fetch("http://localhost:8000/crear_producto", {
+        const res = await fetch("http://localhost:8000/productos/crear_producto", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify( nuevoProducto )
