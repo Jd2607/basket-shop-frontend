@@ -18,6 +18,20 @@ export const obtenerProductos = async () => {
 
 
 
+//funcion para obtener un solo producto
+export const obtenerProducto = async (id) => {
+  try {
+    const res = await axios.post(`${API_URL}/productos/obtener`, {
+      id
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error al obtener el producto:", error);
+    throw error;
+  }
+};
+
+
 // funcion para obtener todas las categorías
 export const obtenerCategorias = async () => {
   try {

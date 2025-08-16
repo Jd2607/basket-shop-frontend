@@ -4,6 +4,7 @@ import Catalogo from "./Catalogo";
 import Categorias from "./Categorias";
 import Inventario from "./Inventario";
 import Carrito from "./Carrito";
+import Pedidos from "./Pedidos";
 import "../estilos/App.css";
 import RutaProtegida from "../servicios/proteccionRutas";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/categorias" element={<RutaProtegida> <Categorias /> </RutaProtegida>} />
         <Route path="/inventario" element={<RutaProtegida> <Inventario /> </RutaProtegida>} />
         <Route path="/carrito" element={<RutaProtegida> <Carrito /> </RutaProtegida>} />
+        <Route path="/pedidos" element={<RutaProtegida> <Pedidos /> </RutaProtegida>} />
       </Routes>
     </BrowserRouter>
   );

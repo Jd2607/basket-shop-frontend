@@ -40,6 +40,10 @@ function Navbar(props) {
                             </li>
                         </ul>
 
+                        <button id="btnPedidos" className="btn btn-danger me-3" onClick={() => navigate("/pedidos")}>
+                            Mis pedidos
+                        </button>
+
                         <button id="btnCarrito" className="btn btn-danger me-3" onClick={() => navigate("/carrito")}>
                             <i class="fa-solid fa-cart-shopping"></i>
                         </button>

@@ -1,12 +1,19 @@
 import Navbar from "./Navbar";
 import "../estilos/Carrito.css";
 import CartaProductoCarrito from "./CartaProductoCarrito";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { alertaCheck } from "../servicios/Alertas";
 
 function Carrito(){
 
-    const carrito = localStorage.getItem('carrito');
-    const [productos,setProductos] = useState(JSON.parse(carrito) || []);
+    const [productos,setProductos] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
+    const [totalCompra,setTotalCompra] = useState(0);
+
+    useEffect(() => {
+        setTotalCompra(
+            productos.reduce((total, prod) => total + (prod.precio * prod.cantidad), 0)
+        );
+    }, [productos]); 
 
     const actualizarCarrito = (id) => {
         const nuevosProductos = productos
@@ -28,6 +35,8 @@ function Carrito(){
 
         // Guardamos en localStorage
         localStorage.setItem('carrito', JSON.stringify(nuevosProductos));
+
+        setTotalCompra(nuevosProductos.reduce((total, prod) => total + (prod.precio * prod.cantidad), 0));
     };
 
     const aumentarCantidad = (id) => {
@@ -44,8 +53,54 @@ function Carrito(){
 
         // Guardamos en localStorage
         localStorage.setItem('carrito', JSON.stringify(nuevosProductos));
+
+        setTotalCompra(nuevosProductos.reduce((total, prod) => total + (prod.precio * prod.cantidad), 0));
     };
 
+    //esta funcion crear un registro de cada producto y su cantida y lo asocia con un pedido
+    async function crearPedidoProducto(data, prod){
+        const resMovimiento = await fetch("http://localhost:8000/pedido_productos/crear", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pedido_id: data.id, producto_id: prod.id, cantidad: prod.cantidad, precio_unitario: prod.precio })
+        });
+    }
+
+    //funcion para crear el pedido
+    const crearPedido = async (e) =>{
+        try {
+
+            //obtenemos la fecha y hora
+            const fechaColombiaISO = new Date().toLocaleString("sv-SE", {
+                timeZone: "America/Bogota",
+                hour12: false
+            }).replace(" ", "T");
+
+
+            //creamos un pedido
+            const res = await fetch("http://localhost:8000/pedidos/crear_pedido", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                //id 1 ya que solo manejamos un usuario
+                body: JSON.stringify({ usuario_id: 1, valorTotal: totalCompra, fecha: fechaColombiaISO, estado: "procesado" })
+            });
+
+            const data = await res.json();
+
+
+            productos.map((prod, index) => {
+                crearPedidoProducto(data, prod);
+            })
+
+            alertaCheck("Pedido creado con éxito");
+            localStorage.removeItem('carrito');
+                setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        } catch (error) {
+            console.error("Error al crear el pedido:", error);
+        }
+    }
 
 
     return (
@@ -76,6 +131,8 @@ function Carrito(){
                             <p>CUENTA TOTAL</p>
                             <hr></hr>
                             <p>${productos.reduce((total, prod) => total + (prod.precio * prod.cantidad), 0).toLocaleString()}</p>
+                            <hr></hr>
+                            <button className="btn btn-primary" onClick={crearPedido}>Finalizar Compra</button>
                         </div>
                     </div>
                 </div>
