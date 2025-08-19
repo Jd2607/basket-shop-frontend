@@ -50,10 +50,16 @@ function ContenedorPedido(props) {
     const detallesProductos = [];
     for (let i = 0; i < listaProds.length; i++) {
         detallesProductos.push(
-            <ul key={i} style={{ display: "flex", gap: "10px", listStyle: "none" }}>
-                <li>{listaProds[i].nombre} - Cantidad: {productos[i].cantidad}</li>
-                <li>{listaProds[i].precio.toLocaleString()}</li>
-                <li>Subtotal: { (listaProds[i].precio * productos[i].cantidad).toLocaleString() } </li>
+            <ul key={i} style={{ display: "flex", justifyContent: "space-between", gap: "10px", listStyle: "none" }}>
+                <div className="col">
+                    <li>{listaProds[i].nombre} - Cantidad: {productos[i].cantidad}</li>
+                </div>
+                <div className="col">
+                    <li>Valor unitario: {listaProds[i].precio.toLocaleString()}</li>
+                </div>
+                <div className="col">
+                    <li>Subtotal: { (listaProds[i].precio * productos[i].cantidad).toLocaleString() } </li>
+                </div>
             </ul>
         );
     }
@@ -73,10 +79,8 @@ function ContenedorPedido(props) {
 
                     <div className="col-8 mt-4">
                         <div className="row">
-                            <div className="col">
                                 <h5>Productos</h5>
                                 {detallesProductos}
-                            </div>
                             <hr></hr>
                             <p> Total compra: {props.pedido.valorTotal.toLocaleString()} </p>
                         </div>

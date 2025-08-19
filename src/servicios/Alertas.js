@@ -5,14 +5,14 @@ export function alertaCheck(titulo, mensaje, reiniciar){
     title: titulo,
     text: mensaje,
     icon: 'success',
-    confirmButtonText: 'Aceptar'
-    });
-
-    if (reiniciar) {
-        setTimeout(() => {
+    confirmButtonText: 'Aceptar',
+    allowOutsideClick: false, // evita que se cierre el modal al dar  clic fuera
+    allowEscapeKey: false     // evita que se cierre el modal el pulsar ESC
+    }).then((result) => {
+        if (result.isConfirmed && reiniciar) {
             window.location.reload();
-        }, 1500);
-    }
+        }
+    });
 }
 
 
